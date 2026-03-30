@@ -46,7 +46,6 @@
     overflow: hidden;
   }
 
-  /* grid pattern overlay */
   .hero::before {
     content: '';
     position: absolute;
@@ -58,7 +57,6 @@
     pointer-events: none;
   }
 
-  /* glow blob */
   .hero::after {
     content: '';
     position: absolute;
@@ -83,7 +81,6 @@
     max-width: 720px;
   }
 
-  /* logo area */
   .logo-icon {
     display: inline-flex;
     align-items: center;
@@ -186,35 +183,57 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ─── STATS BAR ─── */
-  .stats-bar {
+  /* ─── STEPS BAR ─── */
+  .steps-bar {
     background: var(--blue-navy);
     border-top: 1px solid rgba(255,255,255,.08);
     border-bottom: 1px solid rgba(255,255,255,.08);
-    padding: 1.5rem 1rem;
+    padding: 2.5rem 1rem;
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
     flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
-  .stat-item {
+  .steps-container {
+    background: var(--blue-navy);
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 2.5rem 1rem;
+  }
+
+  .step-item {
     text-align: center;
+    flex: 1;
+    min-width: 150px;
+    max-width: 250px;
+    position: relative;
   }
 
-  .stat-number {
+  .step-item:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -1.2rem;
+    top: 1.2rem;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,.2);
+  }
+
+  .step-number {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--yellow-accent);
     letter-spacing: 1px;
+    line-height: 1;
   }
 
-  .stat-label {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,.5);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 0.2rem;
+  .step-label {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,.6);
+    margin-top: 0.4rem;
+    line-height: 1.4;
   }
 
   /* ─── FORM SECTION ─── */
@@ -245,19 +264,43 @@
     margin-bottom: 2rem;
   }
 
+  .form-header .lock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(255,229,0,.1);
+    border: 1px solid rgba(255,229,0,.25);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .form-header .lock-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--yellow-accent);
+  }
+
   .form-header h2 {
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 4vw, 2.2rem);
     letter-spacing: 2px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-header h2 .highlight {
+    color: var(--yellow-accent);
   }
 
   .form-header p {
     color: rgba(255,255,255,.5);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
-  /* iframe container */
   .form-container {
     background: var(--white);
     border-radius: 12px;
@@ -287,101 +330,34 @@
     display: block;
   }
 
-  /* ─── COMMUNITY SECTION ─── */
-  .community-section {
-    padding: 4rem 1.5rem 5rem;
+  .form-note {
     text-align: center;
-    background: linear-gradient(180deg, #0D2240 0%, var(--blue-navy) 100%);
-    position: relative;
-  }
-
-  .community-inner {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .community-icon {
-    width: 64px;
-    height: 64px;
-    background: rgba(10,143,255,.15);
-    border: 1px solid rgba(10,143,255,.3);
-    border-radius: 16px;
-    display: inline-flex;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255,229,0,.06);
+    border: 1px solid rgba(255,229,0,.15);
+    border-radius: 8px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
   }
 
-  .community-icon svg {
-    width: 32px;
-    height: 32px;
-    color: var(--blue-primary);
-  }
-
-  .community-section h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-  }
-
-  .community-section h2 .highlight {
+  .form-note svg {
+    width: 18px;
+    height: 18px;
     color: var(--yellow-accent);
+    flex-shrink: 0;
   }
 
-  .community-section p {
+  .form-note p {
+    font-size: 0.85rem;
     color: rgba(255,255,255,.6);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    line-height: 1.5;
   }
 
-  .community-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--blue-primary);
-    color: var(--white);
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    letter-spacing: 3px;
-    padding: 1.1rem 3rem;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 4px 24px rgba(10,143,255,.4);
-    transition: all .3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .community-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-    transform: translateX(-100%);
-    transition: transform .5s ease;
-  }
-
-  .community-btn:hover::before {
-    transform: translateX(100%);
-  }
-
-  .community-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(10,143,255,.5);
-  }
-
-  .community-btn svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .divider-note {
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,.3);
-    letter-spacing: 1px;
+  .form-note strong {
+    color: var(--yellow-accent);
   }
 
   /* ─── FOOTER ─── */
@@ -389,7 +365,7 @@
     padding: 2rem 1.5rem;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,.06);
-    background: var(--blue-navy);
+    background: #0D2240;
   }
 
   footer p {
@@ -406,19 +382,17 @@
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     .hero { padding: 4rem 1.2rem 3rem; min-height: 90vh; }
-    .stats-bar { gap: 1.5rem; padding: 1.2rem 0.5rem; }
-    .stat-number { font-size: 1.5rem; }
+    .steps-bar { gap: 1.5rem; }
+    .step-item:not(:last-child)::after { display: none; }
     .form-section { padding: 3rem 1rem 2rem; }
     .form-container iframe { min-height: 1600px; }
-    .community-section { padding: 3rem 1.2rem 4rem; }
     .scroll-cta { font-size: 1.1rem; padding: 0.9rem 2rem; }
-    .community-btn { font-size: 1.2rem; padding: 1rem 2rem; }
   }
 
   @media (max-width: 480px) {
     .hero h1 { font-size: 2.4rem; }
     .form-container iframe { min-height: 1800px; }
-    .stats-bar { gap: 1rem; }
+    .steps-bar { gap: 1rem; }
   }
 </style>
 </head>
@@ -439,19 +413,19 @@
         <span class="logo-text">RESET.CREA</span>
       </div>
 
-      <div class="badge">Comunidad Exclusiva</div>
+      <div class="badge">Acceso exclusivo</div>
 
       <h1>
-        BIENVENIDO A LA
+        DESBLOQUEÁ TU ACCESO A LA
         <span class="highlight">INCUBADORA RESET</span>
       </h1>
 
       <p class="subtitle">
-        El espacio donde creadores de contenido y emprendedores se conectan, aprenden y construyen marcas auténticas que impactan.
+        Completá el formulario para acceder a la comunidad exclusiva donde creadores de contenido y emprendedores construyen marcas auténticas que impactan.
       </p>
 
       <a href="#formulario" class="scroll-cta">
-        COMPLETAR FORMULARIO
+        QUIERO ACCEDER
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         </svg>
@@ -460,23 +434,21 @@
     </div>
   </section>
 
-  <!-- ═══ STATS BAR ═══ -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-number">+200</div>
-      <div class="stat-label">Creadores</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">+30H</div>
-      <div class="stat-label">De contenido</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">4</div>
-      <div class="stat-label">Módulos</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Comunidad Real</div>
+  <!-- ═══ STEPS ═══ -->
+  <div class="steps-container">
+    <div class="steps-bar">
+      <div class="step-item">
+        <div class="step-number">01</div>
+        <div class="step-label">Completá el formulario con tus datos</div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">02</div>
+        <div class="step-label">Enviá tus respuestas</div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">03</div>
+        <div class="step-label">Desbloqueá el link y unite a la comunidad</div>
+      </div>
     </div>
   </div>
 
@@ -484,8 +456,13 @@
   <section class="form-section" id="formulario">
     <div class="form-wrapper">
       <div class="form-header">
-        <h2>COMPLETÁ TUS DATOS PARA INGRESAR</h2>
-        <p>Tomá unos minutos para contarnos sobre vos. Todas las respuestas son confidenciales.</p>
+        <div class="lock-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+          </svg>
+        </div>
+        <h2>COMPLETÁ EL FORMULARIO PARA <span class="highlight">DESBLOQUEAR TU ACCESO</span></h2>
+        <p>Contanos sobre vos en unos minutos. Al enviar tus respuestas, se desbloqueará el link para unirte a la comunidad.</p>
       </div>
 
       <div class="form-container">
@@ -497,38 +474,13 @@
           loading="lazy"
         >Cargando…</iframe>
       </div>
-    </div>
-  </section>
 
-  <!-- ═══ COMMUNITY SECTION ═══ -->
-  <section class="community-section">
-    <div class="community-inner">
-
-      <div class="community-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
-        </svg>
-      </div>
-
-      <h2>
-        ¿YA COMPLETASTE EL FORMULARIO?
-        <span class="highlight">UNITE A LA COMUNIDAD</span>
-      </h2>
-
-      <p>
-        Una vez que enviaste tus respuestas, ya estás listo para entrar.
-        Hacé clic en el botón de abajo para unirte al grupo de la comunidad Reset Creators.
-      </p>
-
-      <!-- ⚠️ REEMPLAZAR # CON EL LINK REAL DE LA COMUNIDAD -->
-      <a href="#" class="community-btn" target="_blank" rel="noopener">
-        UNIRME A LA COMUNIDAD
+      <div class="form-note">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
         </svg>
-      </a>
-
-      <p class="divider-note">* El acceso al grupo se habilitará una vez revisada tu solicitud</p>
+        <p>Una vez que envíes el formulario, <strong>el link a la comunidad aparecerá en la pantalla de confirmación</strong>. No cierres esta ventana hasta completarlo.</p>
+      </div>
 
     </div>
   </section>
