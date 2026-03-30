@@ -360,6 +360,81 @@
     color: var(--yellow-accent);
   }
 
+  /* ─── COUNTDOWN ─── */
+  .countdown-bar {
+    background: rgba(255,229,0,.08);
+    border: 1px solid rgba(255,229,0,.2);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .countdown-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow-accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .countdown-label svg {
+    width: 16px;
+    height: 16px;
+    animation: pulse 1.5s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 64px;
+  }
+
+  .countdown-number {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1;
+    background: rgba(255,255,255,.06);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    min-width: 64px;
+  }
+
+  .countdown-sep {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: rgba(255,255,255,.2);
+    line-height: 1;
+    padding-top: 0.5rem;
+  }
+
+  .countdown-text {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.35);
+    margin-top: 0.4rem;
+  }
+
   /* ─── FOOTER ─── */
   footer {
     padding: 2rem 1.5rem;
@@ -465,6 +540,31 @@
         <p>Contanos sobre vos en unos minutos. Al enviar tus respuestas, se desbloqueará el link para unirte a la comunidad.</p>
       </div>
 
+      <div class="countdown-bar">
+        <div class="countdown-label">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          EL ACCESO CIERRA EN
+        </div>
+        <div class="countdown-timer">
+          <div class="countdown-unit">
+            <div class="countdown-number" id="cd-hours">02</div>
+            <div class="countdown-text">Horas</div>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit">
+            <div class="countdown-number" id="cd-minutes">00</div>
+            <div class="countdown-text">Minutos</div>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit">
+            <div class="countdown-number" id="cd-seconds">00</div>
+            <div class="countdown-text">Segundos</div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-container">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSeW7TrHhyo6W_gQJjCHh_WFXoOj5IUh-0lQMSrKgnwk6zdVWQ/viewform?embedded=true"
@@ -489,6 +589,29 @@
   <footer>
     <p>RESET.CREA &copy; 2026 — Todos los derechos reservados &nbsp;|&nbsp; <a href="https://www.instagram.com/Freeteto_/" target="_blank">@Freeteto_</a></p>
   </footer>
+
+<script>
+  // Countdown timer - 2 hours from page load
+  (function() {
+    var total = 2 * 60 * 60; // 2 hours in seconds
+    var hours = document.getElementById('cd-hours');
+    var mins = document.getElementById('cd-minutes');
+    var secs = document.getElementById('cd-seconds');
+
+    function update() {
+      if (total <= 0) return;
+      total--;
+      var h = Math.floor(total / 3600);
+      var m = Math.floor((total % 3600) / 60);
+      var s = total % 60;
+      hours.textContent = h.toString().padStart(2, '0');
+      mins.textContent = m.toString().padStart(2, '0');
+      secs.textContent = s.toString().padStart(2, '0');
+    }
+
+    setInterval(update, 1000);
+  })();
+</script>
 
 </body>
 </html>
