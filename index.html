@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incubadora Reset — Formulario de Ingreso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-primary: #0A8FFF;
+    --blue-dark: #0066CC;
+    --blue-navy: #0A1628;
+    --blue-light: #D6EAFF;
+    --yellow-accent: #FFE500;
+    --white: #FFFFFF;
+    --gray-100: #F4F7FA;
+    --gray-600: #5A6A7A;
+    --font-display: 'Bebas Neue', Impact, sans-serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--blue-navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: linear-gradient(165deg, var(--blue-primary) 0%, #0570D4 50%, var(--blue-navy) 100%);
+    overflow: hidden;
+  }
+
+  /* grid pattern overlay */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* glow blob */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,229,0,.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.1); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+  }
+
+  /* logo area */
+  .logo-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideUp .6s ease forwards;
+  }
+
+  .logo-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(255,229,0,.15);
+    border: 1px solid rgba(255,229,0,.3);
+    color: var(--yellow-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: slideUp .6s ease .15s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: slideUp .6s ease .25s forwards;
+  }
+
+  .hero h1 .highlight {
+    color: var(--yellow-accent);
+    display: block;
+  }
+
+  .hero p.subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    font-weight: 400;
+    color: rgba(255,255,255,.8);
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: slideUp .6s ease .4s forwards;
+  }
+
+  .scroll-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--white);
+    color: var(--blue-navy);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(0,0,0,.25), 0 0 0 0 rgba(255,229,0,0);
+    transition: all .3s ease;
+    opacity: 0;
+    animation: slideUp .6s ease .55s forwards;
+  }
+
+  .scroll-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 0 0 3px var(--yellow-accent);
+  }
+
+  .scroll-cta svg {
+    width: 20px;
+    height: 20px;
+    animation: bounce 2s ease infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--blue-navy);
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--yellow-accent);
+    letter-spacing: 1px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* ─── FORM SECTION ─── */
+  .form-section {
+    position: relative;
+    padding: 4rem 1.5rem 2rem;
+    background: linear-gradient(180deg, var(--blue-navy) 0%, #0D2240 100%);
+  }
+
+  .form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--yellow-accent), transparent);
+  }
+
+  .form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-header p {
+    color: rgba(255,255,255,.5);
+    font-size: 0.9rem;
+  }
+
+  /* iframe container */
+  .form-container {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.06),
+      0 20px 60px rgba(0,0,0,.4),
+      0 0 80px rgba(10,143,255,.08);
+    position: relative;
+  }
+
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue-primary), var(--yellow-accent), var(--blue-primary));
+    z-index: 2;
+  }
+
+  .form-container iframe {
+    width: 100%;
+    min-height: 1400px;
+    border: none;
+    display: block;
+  }
+
+  /* ─── COMMUNITY SECTION ─── */
+  .community-section {
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+    background: linear-gradient(180deg, #0D2240 0%, var(--blue-navy) 100%);
+    position: relative;
+  }
+
+  .community-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .community-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(10,143,255,.15);
+    border: 1px solid rgba(10,143,255,.3);
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .community-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--blue-primary);
+  }
+
+  .community-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .community-section h2 .highlight {
+    color: var(--yellow-accent);
+  }
+
+  .community-section p {
+    color: rgba(255,255,255,.6);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .community-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--blue-primary);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    padding: 1.1rem 3rem;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(10,143,255,.4);
+    transition: all .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .community-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+    transform: translateX(-100%);
+    transition: transform .5s ease;
+  }
+
+  .community-btn:hover::before {
+    transform: translateX(100%);
+  }
+
+  .community-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(10,143,255,.5);
+  }
+
+  .community-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .divider-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,.3);
+    letter-spacing: 1px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,.06);
+    background: var(--blue-navy);
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,.25);
+    letter-spacing: 0.5px;
+  }
+
+  footer a {
+    color: var(--blue-primary);
+    text-decoration: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 1.2rem 3rem; min-height: 90vh; }
+    .stats-bar { gap: 1.5rem; padding: 1.2rem 0.5rem; }
+    .stat-number { font-size: 1.5rem; }
+    .form-section { padding: 3rem 1rem 2rem; }
+    .form-container iframe { min-height: 1600px; }
+    .community-section { padding: 3rem 1.2rem 4rem; }
+    .scroll-cta { font-size: 1.1rem; padding: 0.9rem 2rem; }
+    .community-btn { font-size: 1.2rem; padding: 1rem 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2.4rem; }
+    .form-container iframe { min-height: 1800px; }
+    .stats-bar { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-content">
+
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4C14 4 8 10 8 16c0 4 2 7 5 9-2 3-1 7 2 9 2 1 5 1 7-1 2 2 5 2 7 1 3-2 4-6 2-9 3-2 5-5 5-9 0-6-6-12-12-12h-4z" fill="#FFE500" opacity="0.9"/>
+          <path d="M18 8c-4 1-7 5-7 9 0 3 1.5 5.5 4 7l1-1c-2-1.5-3-4-3-6 0-3.5 2.5-6.5 5.5-7.5L18 8z" fill="rgba(255,255,255,0.4)"/>
+          <path d="M22 8c4 1 7 5 7 9 0 3-1.5 5.5-4 7l-1-1c2-1.5 3-4 3-6 0-3.5-2.5-6.5-5.5-7.5L22 8z" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="16" cy="16" r="1.5" fill="var(--blue-navy)"/>
+          <circle cx="24" cy="16" r="1.5" fill="var(--blue-navy)"/>
+        </svg>
+        <span class="logo-text">RESET.CREA</span>
+      </div>
+
+      <div class="badge">Comunidad Exclusiva</div>
+
+      <h1>
+        BIENVENIDO A LA
+        <span class="highlight">INCUBADORA RESET</span>
+      </h1>
+
+      <p class="subtitle">
+        El espacio donde creadores de contenido y emprendedores se conectan, aprenden y construyen marcas auténticas que impactan.
+      </p>
+
+      <a href="#formulario" class="scroll-cta">
+        COMPLETAR FORMULARIO
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ STATS BAR ═══ -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">+200</div>
+      <div class="stat-label">Creadores</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">+30H</div>
+      <div class="stat-label">De contenido</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Módulos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Comunidad Real</div>
+    </div>
+  </div>
+
+  <!-- ═══ FORM SECTION ═══ -->
+  <section class="form-section" id="formulario">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h2>COMPLETÁ TUS DATOS PARA INGRESAR</h2>
+        <p>Tomá unos minutos para contarnos sobre vos. Todas las respuestas son confidenciales.</p>
+      </div>
+
+      <div class="form-container">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSeW7TrHhyo6W_gQJjCHh_WFXoOj5IUh-0lQMSrKgnwk6zdVWQ/viewform?embedded=true"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          loading="lazy"
+        >Cargando…</iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMMUNITY SECTION ═══ -->
+  <section class="community-section">
+    <div class="community-inner">
+
+      <div class="community-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+        </svg>
+      </div>
+
+      <h2>
+        ¿YA COMPLETASTE EL FORMULARIO?
+        <span class="highlight">UNITE A LA COMUNIDAD</span>
+      </h2>
+
+      <p>
+        Una vez que enviaste tus respuestas, ya estás listo para entrar.
+        Hacé clic en el botón de abajo para unirte al grupo de la comunidad Reset Creators.
+      </p>
+
+      <!-- ⚠️ REEMPLAZAR # CON EL LINK REAL DE LA COMUNIDAD -->
+      <a href="#" class="community-btn" target="_blank" rel="noopener">
+        UNIRME A LA COMUNIDAD
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+        </svg>
+      </a>
+
+      <p class="divider-note">* El acceso al grupo se habilitará una vez revisada tu solicitud</p>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p>RESET.CREA &copy; 2026 — Todos los derechos reservados &nbsp;|&nbsp; <a href="https://www.instagram.com/Freeteto_/" target="_blank">@Freeteto_</a></p>
+  </footer>
+
+</body>
+</html>
